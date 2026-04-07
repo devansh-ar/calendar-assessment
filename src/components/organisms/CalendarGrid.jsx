@@ -19,10 +19,10 @@ export default function CalendarGrid({ days, getSelectionState, getNotesForDate,
           {DAY_LABELS.map((label, i) => (
             <th
               key={label}
-              className={`text-[10px] font-semibold pb-2 pt-1 text-center uppercase tracking-wider ${
+              className={`text-[10px] font-semibold pb-2.5 pt-1 text-center uppercase tracking-wider ${
                 i >= 5
-                  ? (isDark ? "text-violet-400/50" : "text-violet-400")
-                  : (isDark ? "text-white/20" : "text-stone-400")
+                  ? (isDark ? "text-violet-500/60" : "text-violet-400")
+                  : (isDark ? "text-white/15" : "text-stone-400/80")
               }`}
             >
               <span className="hidden sm:inline">{label}</span>
