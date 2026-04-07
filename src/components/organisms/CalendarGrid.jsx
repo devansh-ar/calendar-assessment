@@ -5,13 +5,11 @@ import DayCell from "@/components/molecules/DayCell";
 
 function chunkWeeks(days) {
   const weeks = [];
-  for (let i = 0; i < days.length; i += 7) {
-    weeks.push(days.slice(i, i + 7));
-  }
+  for (let i = 0; i < days.length; i += 7) weeks.push(days.slice(i, i + 7));
   return weeks;
 }
 
-export default function CalendarGrid({ days, getSelectionState, getNotesForDate, onDayClick, onDayHover }) {
+export default function CalendarGrid({ days, getSelectionState, getNotesForDate, onDayClick, onDayHover, isDark }) {
   const weeks = chunkWeeks(days);
 
   return (
@@ -21,8 +19,10 @@ export default function CalendarGrid({ days, getSelectionState, getNotesForDate,
           {DAY_LABELS.map((label, i) => (
             <th
               key={label}
-              className={`text-xs sm:text-sm font-semibold py-1 sm:py-2 text-center ${
-                i >= 5 ? "text-sky-500" : "text-gray-500"
+              className={`text-[10px] font-semibold pb-2 pt-1 text-center uppercase tracking-wider ${
+                i >= 5
+                  ? (isDark ? "text-violet-400/50" : "text-violet-400")
+                  : (isDark ? "text-white/20" : "text-stone-400")
               }`}
             >
               <span className="hidden sm:inline">{label}</span>
@@ -42,6 +42,7 @@ export default function CalendarGrid({ days, getSelectionState, getNotesForDate,
                 hasNotes={getNotesForDate(dayData.dateStr).length > 0}
                 onClick={onDayClick}
                 onMouseEnter={onDayHover}
+                isDark={isDark}
               />
             ))}
           </tr>

@@ -14,23 +14,20 @@ export default function HeroImage({ month, year, flipDirection }) {
         src={image.url}
         alt={image.alt}
         className={`absolute inset-0 w-full h-full object-cover ${animClass}`}
+        loading="eager"
       />
 
-      <div
-        className="absolute bottom-0 right-0 w-3/5 h-2/5"
-        style={{
-          clipPath: "polygon(30% 0%, 100% 0%, 100% 100%, 0% 100%)",
-          background: "linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%)",
-        }}
-      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+      <div className="absolute bottom-0 right-0 w-[55%] h-[42%] overlay-stripe" />
 
-      <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 text-right text-white z-10">
-        <div className="text-sm sm:text-base font-medium tracking-widest opacity-90">
+      <div className="absolute bottom-3 right-4 sm:bottom-5 sm:right-6 text-right z-10">
+        <span className="text-white/70 text-[11px] sm:text-xs font-medium tracking-[0.3em] block">
           {year}
-        </div>
-        <div className="text-xl sm:text-3xl font-bold tracking-wider uppercase">
+        </span>
+        <span className="text-white text-xl sm:text-3xl font-extrabold tracking-wider uppercase block leading-tight"
+          style={{ textShadow: "0 1px 4px rgba(0,0,0,0.15)" }}>
           {MONTH_NAMES[month]}
-        </div>
+        </span>
       </div>
     </div>
   );

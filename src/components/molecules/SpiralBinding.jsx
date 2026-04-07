@@ -1,12 +1,12 @@
 "use client";
 
-const COIL_COUNT = 11;
+const RINGS = 9;
 
-export default function SpiralBinding() {
+export default function SpiralBinding({ isDark }) {
   return (
-    <div className="flex justify-center gap-3 sm:gap-4 py-2 bg-gray-200 rounded-t-xl relative z-10">
-      {Array.from({ length: COIL_COUNT }, (_, i) => (
-        <div key={i} className="spiral-dot" />
+    <div className={`flex justify-center gap-4 sm:gap-5 py-2 ${isDark ? "bg-white/[0.02]" : "bg-stone-50"}`}>
+      {Array.from({ length: RINGS }, (_, i) => (
+        <div key={i} className="spiral-ring" />
       ))}
     </div>
   );

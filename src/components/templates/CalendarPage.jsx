@@ -24,20 +24,11 @@ export default function CalendarPage() {
   const [isDark, setIsDark] = useState(false);
   const [touchStartX, setTouchStartX] = useState(null);
 
-  useEffect(() => {
-    document.body.style.background = isDark ? "#1a1a2e" : "#f3f4f6";
-  }, [isDark]);
-
-  const handleTouchStart = useCallback((e) => {
-    setTouchStartX(e.touches[0].clientX);
-  }, []);
-
+  const handleTouchStart = useCallback((e) => setTouchStartX(e.touches[0].clientX), []);
   const handleTouchEnd = useCallback((e) => {
     if (touchStartX === null) return;
     const diff = e.changedTouches[0].clientX - touchStartX;
-    if (Math.abs(diff) > SWIPE_THRESHOLD) {
-      navigateMonth(diff > 0 ? -1 : 1);
-    }
+    if (Math.abs(diff) > SWIPE_THRESHOLD) navigateMonth(diff > 0 ? -1 : 1);
     setTouchStartX(null);
   }, [touchStartX, navigateMonth]);
 
@@ -51,68 +42,92 @@ export default function CalendarPage() {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [navigateMonth, clearSelection]);
 
-  const cardBg = isDark ? "bg-gray-900 shadow-2xl shadow-black/50" : "bg-white shadow-2xl shadow-gray-300/50";
-  const panelBg = isDark ? "bg-gray-900 shadow-xl shadow-black/50" : "bg-white shadow-xl shadow-gray-200/50";
+  const card = isDark ? "cal-card-dark" : "cal-card-light";
 
   return (
-    <div className={`min-h-screen flex items-start justify-center p-4 sm:p-6 lg:p-8 transition-colors duration-500 ${
-      isDark ? "bg-[#1a1a2e]" : "bg-gray-100"
-    }`}>
+    <div className={`min-h-screen ${isDark ? "page-dark" : "page-light"}`}>
       <ThemeToggle isDark={isDark} onToggle={() => setIsDark((v) => !v)} />
 
-      <div className="w-full max-w-5xl flex flex-col lg:flex-row gap-4 lg:gap-6 mt-8">
-        <div
-          className={`flex-1 max-w-lg mx-auto lg:mx-0 rounded-b-xl overflow-hidden transition-shadow duration-300 ${cardBg}`}
-          onTouchStart={handleTouchStart}
-          onTouchEnd={handleTouchEnd}
-        >
-          <SpiralBinding />
-          <HeroImage month={currentMonth} year={currentYear} flipDirection={flipDirection} />
-          <CalendarNav
-            onPrev={() => navigateMonth(-1)}
-            onNext={() => navigateMonth(1)}
-            onToday={goToToday}
-          />
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+        <header className="mb-8 sm:mb-10">
+          <p className={`text-xs uppercase tracking-[0.25em] mb-1 ${isDark ? "text-violet-400/50" : "text-stone-400"}`}>
+            Personal planner
+          </p>
+          <h1 className={`text-2xl sm:text-3xl font-bold tracking-tight ${isDark ? "text-white" : "text-stone-800"}`}>
+            My Calendar
+          </h1>
+        </header>
 
-          <div className="flex flex-col sm:flex-row px-3 sm:px-4 pb-4">
-            <div className="hidden sm:block sm:w-1/3 pr-3 border-r border-gray-100">
-              <InlineNotes notes={notes} onAdd={addNote} startDate={startDate} endDate={endDate} />
+        <div className="flex flex-col lg:flex-row gap-6">
+          <div
+            className={`flex-shrink-0 w-full lg:w-[440px] rounded-2xl overflow-hidden ${card}`}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+          >
+            <SpiralBinding isDark={isDark} />
+            <HeroImage month={currentMonth} year={currentYear} flipDirection={flipDirection} />
+            <CalendarNav
+              onPrev={() => navigateMonth(-1)}
+              onNext={() => navigateMonth(1)}
+              onToday={goToToday}
+              isDark={isDark}
+            />
+
+            <div className="flex flex-col sm:flex-row px-4 sm:px-5 pb-5 gap-0">
+              <div className={`hidden sm:block sm:w-[130px] sm:flex-shrink-0 pr-3 border-r ${
+                isDark ? "border-white/6" : "border-stone-200"
+              }`}>
+                <InlineNotes notes={notes} onAdd={addNote} startDate={startDate} endDate={endDate} isDark={isDark} />
+              </div>
+              <div className="flex-1 sm:pl-4">
+                <CalendarGrid
+                  days={days}
+                  getSelectionState={getSelectionState}
+                  getNotesForDate={getNotesForDate}
+                  onDayClick={handleDayClick}
+                  onDayHover={handleDayHover}
+                  isDark={isDark}
+                />
+              </div>
             </div>
-            <div className="flex-1 sm:pl-3">
-              <CalendarGrid
-                days={days}
-                getSelectionState={getSelectionState}
-                getNotesForDate={getNotesForDate}
-                onDayClick={handleDayClick}
-                onDayHover={handleDayHover}
-              />
+
+            <RangeIndicator startDate={startDate} endDate={endDate} onClear={clearSelection} isDark={isDark} />
+          </div>
+
+          <div className={`flex-1 min-w-0 rounded-2xl overflow-hidden ${card}`}>
+            <div className="px-5 pt-5 pb-1 flex items-baseline justify-between">
+              <h2 className={`text-xs font-semibold uppercase tracking-[0.2em] ${
+                isDark ? "text-violet-400/40" : "text-stone-400"
+              }`}>
+                Notes
+              </h2>
+              <span className={`text-[10px] ${isDark ? "text-white/20" : "text-stone-300"}`}>
+                {notes.length} {notes.length === 1 ? "note" : "notes"}
+              </span>
             </div>
-          </div>
-
-          <RangeIndicator startDate={startDate} endDate={endDate} onClear={clearSelection} />
-        </div>
-
-        <div className={`w-full lg:w-80 rounded-xl overflow-hidden transition-shadow duration-300 ${panelBg}`}>
-          <div className="hidden lg:block px-4 pt-4 pb-2">
-            <h2 className={`text-sm font-semibold uppercase tracking-wider ${isDark ? "text-gray-400" : "text-gray-500"}`}>
-              Notes
-            </h2>
-          </div>
-          <NotesPanel
-            notes={notes}
-            onAdd={addNote}
-            onUpdate={updateNote}
-            onDelete={deleteNote}
-            startDate={startDate}
-            endDate={endDate}
-          />
-        </div>
-
-        <div className="sm:hidden">
-          <div className={`rounded-xl overflow-hidden ${panelBg} px-4 py-3`}>
-            <InlineNotes notes={notes} onAdd={addNote} startDate={startDate} endDate={endDate} />
+            <NotesPanel
+              notes={notes}
+              onAdd={addNote}
+              onUpdate={updateNote}
+              onDelete={deleteNote}
+              startDate={startDate}
+              endDate={endDate}
+              isDark={isDark}
+            />
           </div>
         </div>
+
+        <div className="sm:hidden mt-5">
+          <div className={`rounded-2xl overflow-hidden px-4 py-3 ${card}`}>
+            <InlineNotes notes={notes} onAdd={addNote} startDate={startDate} endDate={endDate} isDark={isDark} />
+          </div>
+        </div>
+
+        <footer className={`mt-12 text-center text-[10px] uppercase tracking-[0.2em] ${
+          isDark ? "text-white/15" : "text-stone-300"
+        }`}>
+          Built with care
+        </footer>
       </div>
     </div>
   );
