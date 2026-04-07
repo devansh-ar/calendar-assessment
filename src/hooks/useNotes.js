@@ -8,16 +8,28 @@ function storageKey(year, month) {
   return `cal-notes-${year}-${String(month + 1).padStart(2, "0")}`;
 }
 
+const MOCK_NOTES = [
+  { id: "mock-1", text: "Team standup at 10am", rangeStart: null, rangeEnd: null, color: "blue", createdAt: 1 },
+  { id: "mock-2", text: "Dentist appointment", rangeStart: null, rangeEnd: null, color: "pink", createdAt: 2 },
+  { id: "mock-3", text: "Submit quarterly report", rangeStart: null, rangeEnd: null, color: "yellow", createdAt: 3 },
+];
+
 export default function useNotes(year, month) {
-  const [notes, setNotes] = useState([]);
+  const [notes, setNotes] = useState(MOCK_NOTES);
   const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
     try {
-      const raw = localStorage.getItem(storageKey(year, month));
-      setNotes(raw ? JSON.parse(raw) : []);
+      const key = storageKey(year, month);
+      const raw = localStorage.getItem(key);
+      if (raw !== null) {
+        const parsed = JSON.parse(raw);
+        setNotes(parsed.length > 0 ? parsed : MOCK_NOTES);
+      } else {
+        setNotes(MOCK_NOTES);
+      }
     } catch {
-      setNotes([]);
+      setNotes(MOCK_NOTES);
     }
     setHydrated(true);
   }, [year, month]);
