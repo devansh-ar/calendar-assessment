@@ -1,26 +1,78 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-sky-50: #f0f9ff;
+  --color-sky-100: #e0f2fe;
+  --color-sky-200: #bae6fd;
+  --color-sky-400: #38bdf8;
+  --color-sky-500: #0ea5e9;
+  --color-sky-600: #0284c7;
+  --color-sky-700: #0369a1;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #f3f4f6;
+  color: #171717;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+.spiral-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #d1d5db, #9ca3af 50%, #6b7280);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3), 0 1px 1px rgba(255, 255, 255, 0.2);
+}
+
+@keyframes flipOut {
+  from { transform: perspective(1200px) rotateX(0deg); opacity: 1; }
+  to { transform: perspective(1200px) rotateX(-90deg); opacity: 0; }
+}
+
+@keyframes flipIn {
+  from { transform: perspective(1200px) rotateX(90deg); opacity: 0; }
+  to { transform: perspective(1200px) rotateX(0deg); opacity: 1; }
+}
+
+.flip-exit {
+  animation: flipOut 0.3s ease-in forwards;
+  transform-origin: top center;
+}
+
+.flip-enter {
+  animation: flipIn 0.3s ease-out forwards;
+  transform-origin: top center;
+}
+
+.notes-line {
+  border-bottom: 1px solid #d1d5db;
+  min-height: 28px;
+  line-height: 28px;
+}
+
+.notes-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+
+.notes-scroll::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 2px;
+}
+
+@media print {
+  body { background: white; }
+  .no-print { display: none !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flip-exit,
+  .flip-enter {
+    animation: none;
+  }
 }
