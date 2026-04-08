@@ -11,13 +11,13 @@ export default function RangeIndicator({ startDate, endDate, onClear, isDark }) 
 
   return (
     <div className={`flex items-center justify-between px-5 py-2.5 text-xs no-print border-t ${
-      isDark ? "border-white/[0.04] bg-violet-500/[0.04]" : "border-violet-100/60 bg-violet-50/40"
+      isDark ? "border-[#2a2a2a] bg-white/[0.02]" : "border-[#e5e5e5] bg-stone-50/50"
     }`}>
-      <span className={isDark ? "text-violet-300/70" : "text-violet-600"}>{label}</span>
+      <span className={isDark ? "text-white/60" : "text-stone-600"}>{label}</span>
       <button
         onClick={onClear}
         className={`font-medium text-[10px] uppercase tracking-wider transition-colors ${
-          isDark ? "text-white/20 hover:text-rose-400" : "text-stone-400 hover:text-rose-500"
+          isDark ? "text-white/30 hover:text-rose-400" : "text-stone-400 hover:text-rose-500"
         }`}
       >
         Clear

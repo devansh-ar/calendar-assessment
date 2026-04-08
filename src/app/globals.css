@@ -21,85 +21,35 @@ body {
 
 .page-light {
   color: #1c1917;
-  background: #f4f2fa;
-  background-image:
-    radial-gradient(circle 800px at 0% 0%, rgba(124, 58, 237, 0.07), transparent),
-    radial-gradient(circle 600px at 100% 100%, rgba(219, 39, 119, 0.05), transparent);
+  background: #ffffff;
   min-height: 100vh;
-}
-
-.page-light::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background-image: radial-gradient(circle, rgba(0,0,0,0.04) 1px, transparent 1px);
-  background-size: 24px 24px;
-  pointer-events: none;
-  z-index: 0;
 }
 
 .page-dark {
   color: #ddd9e7;
-  background: #09070f;
-  background-image:
-    radial-gradient(circle 800px at 20% 0%, rgba(124, 58, 237, 0.1), transparent),
-    radial-gradient(circle 600px at 85% 100%, rgba(168, 85, 247, 0.06), transparent);
+  background: #111111;
   min-height: 100vh;
-}
-
-.page-dark::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background-image: radial-gradient(circle, rgba(124, 58, 237, 0.06) 1px, transparent 1px);
-  background-size: 24px 24px;
-  pointer-events: none;
-  z-index: 0;
 }
 
 .cal-card-light {
   background: #fff;
-  border: 1px solid #ebe8f2;
-  border-radius: 16px;
-  box-shadow:
-    0 1px 2px rgba(0,0,0,0.03),
-    0 4px 16px rgba(109, 40, 217, 0.05),
-    0 12px 40px rgba(109, 40, 217, 0.04);
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.03);
 }
 
 .cal-card-dark {
-  background: #110f1b;
-  border: 1px solid rgba(124, 58, 237, 0.12);
-  border-radius: 16px;
-  box-shadow:
-    0 1px 2px rgba(0,0,0,0.4),
-    0 4px 16px rgba(0,0,0,0.3),
-    0 0 60px -10px rgba(124, 58, 237, 0.08);
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
-.gradient-border-light {
-  position: relative;
-}
-.gradient-border-light::before {
-  content: "";
-  position: absolute;
-  inset: -1px;
-  border-radius: 17px;
-  padding: 1px;
-  background: linear-gradient(135deg, rgba(124,58,237,0.15), rgba(236,72,153,0.08), rgba(124,58,237,0.05));
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.gradient-border-dark::before {
-  background: linear-gradient(135deg, rgba(124,58,237,0.25), rgba(168,85,247,0.1), rgba(124,58,237,0.06));
-}
+.gradient-border-light {}
+.gradient-border-dark {}
 
 .overlay-stripe {
-  background: linear-gradient(135deg, #6d28d9, #8b5cf6);
+  background: linear-gradient(135deg, #1a1a1a, #333);
   clip-path: polygon(35% 0%, 100% 0%, 100% 100%, 0% 100%);
 }
 
@@ -133,51 +83,59 @@ body {
 }
 
 .ruled-line {
-  border-bottom: 1px solid #ebe8f2;
+  border-bottom: 1px solid #e5e5e5;
   height: 28px;
   line-height: 28px;
 }
 .ruled-line-dark {
-  border-color: rgba(124, 58, 237, 0.08);
+  border-color: #2a2a2a;
 }
 
 .scrollbar-thin::-webkit-scrollbar { width: 3px; }
 .scrollbar-thin::-webkit-scrollbar-thumb { background: #d6d3d1; border-radius: 3px; }
+.page-dark .scrollbar-thin::-webkit-scrollbar-thumb { background: #333; }
 
 .input-light {
-  background: #faf9fd;
-  border: 1px solid #ebe8f2;
+  background: #f9f9f9;
+  border: 1px solid #e5e5e5;
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 .input-light:focus {
-  border-color: #a78bfa;
-  box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.12);
+  border-color: #333;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05);
   outline: none;
 }
 
 .input-dark {
-  background: rgba(124, 58, 237, 0.06);
-  border: 1px solid rgba(124, 58, 237, 0.12);
+  background: #222;
+  border: 1px solid #333;
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 .input-dark:focus {
-  border-color: rgba(139, 92, 246, 0.4);
-  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+  border-color: #555;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.05);
   outline: none;
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #7c3aed, #8b5cf6);
+  background: #1a1a1a;
   color: #fff;
   border: none;
   transition: all 0.2s;
 }
 .btn-primary:hover:not(:disabled) {
-  background: linear-gradient(135deg, #6d28d9, #7c3aed);
-  box-shadow: 0 2px 12px rgba(124, 58, 237, 0.3);
+  background: #333;
 }
 .btn-primary:active:not(:disabled) { transform: scale(0.96); }
 .btn-primary:disabled { opacity: 0.3; cursor: not-allowed; }
+
+.page-dark .btn-primary {
+  background: #fff;
+  color: #111;
+}
+.page-dark .btn-primary:hover:not(:disabled) {
+  background: #e5e5e5;
+}
 
 @media print {
   body { background: white !important; }

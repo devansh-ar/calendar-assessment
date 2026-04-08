@@ -4,10 +4,10 @@ import { useState } from "react";
 import CloseIcon from "@/components/atoms/CloseIcon";
 
 const PALETTES = {
-  yellow: { light: "bg-amber-50/80 border-amber-200/40", dark: "bg-amber-500/[0.06] border-amber-500/10" },
-  blue:   { light: "bg-sky-50/80 border-sky-200/40",     dark: "bg-sky-500/[0.06] border-sky-500/10" },
-  green:  { light: "bg-emerald-50/80 border-emerald-200/40", dark: "bg-emerald-500/[0.06] border-emerald-500/10" },
-  pink:   { light: "bg-pink-50/80 border-pink-200/40",   dark: "bg-pink-500/[0.06] border-pink-500/10" },
+  yellow: { light: "bg-amber-50/80 border-amber-200/40", dark: "bg-amber-500/10 border-amber-500/15" },
+  blue:   { light: "bg-sky-50/80 border-sky-200/40",     dark: "bg-sky-500/10 border-sky-500/15" },
+  green:  { light: "bg-emerald-50/80 border-emerald-200/40", dark: "bg-emerald-500/10 border-emerald-500/15" },
+  pink:   { light: "bg-pink-50/80 border-pink-200/40",   dark: "bg-pink-500/10 border-pink-500/15" },
 };
 
 const DOT_COLORS = {
@@ -35,7 +35,7 @@ export default function NoteCard({ note, onUpdate, onDelete, isDark }) {
     : note.rangeStart || "General";
 
   return (
-    <div className={`group rounded-xl border p-3.5 transition-all ${colorClass}`}>
+    <div className={`group rounded-lg border p-3.5 transition-all ${colorClass}`}>
       <div className="flex items-center justify-between mb-2">
         <div className="flex items-center gap-2">
           <span className={`w-1.5 h-1.5 rounded-full ${dot}`} />

@@ -7,10 +7,10 @@ export default function ThemeToggle({ isDark, onToggle }) {
   return (
     <button
       onClick={onToggle}
-      className={`fixed top-5 right-5 z-50 w-10 h-10 flex items-center justify-center rounded-xl transition-all no-print ${
+      className={`w-9 h-9 flex items-center justify-center rounded-lg transition-all no-print ${
         isDark
-          ? "bg-white/[0.04] border border-white/[0.06] hover:bg-white/[0.08] text-white/30"
-          : "bg-white border border-violet-100/60 hover:border-violet-200 text-stone-500 shadow-sm"
+          ? "bg-white/5 border border-white/10 hover:bg-white/10 text-white/50"
+          : "bg-stone-50 border border-stone-200 hover:bg-stone-100 text-stone-500"
       }`}
       aria-label={isDark ? "Light mode" : "Dark mode"}
     >

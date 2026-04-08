@@ -6,8 +6,8 @@ import ChevronRight from "@/components/atoms/ChevronRight";
 
 export default function CalendarNav({ onPrev, onNext, onToday, isDark }) {
   const arrow = isDark
-    ? "hover:bg-white/[0.04] text-white/25 hover:text-white/50"
-    : "hover:bg-violet-50 text-stone-400 hover:text-violet-500";
+    ? "hover:bg-white/5 text-white/30 hover:text-white/60"
+    : "hover:bg-stone-50 text-stone-400 hover:text-stone-600";
 
   return (
     <div className="flex items-center justify-between px-5 py-3 no-print">
@@ -17,10 +17,10 @@ export default function CalendarNav({ onPrev, onNext, onToday, isDark }) {
 
       <button
         onClick={onToday}
-        className={`text-[11px] px-5 py-1.5 rounded-full font-semibold tracking-wider transition-all ${
+        className={`text-[11px] px-5 py-1.5 rounded-md font-semibold tracking-wider transition-all ${
           isDark
-            ? "bg-violet-500/10 text-violet-300 border border-violet-500/15 hover:bg-violet-500/20"
-            : "bg-violet-50 text-violet-600 border border-violet-200/50 hover:bg-violet-100"
+            ? "bg-white/5 text-white/60 border border-white/10 hover:bg-white/10"
+            : "bg-stone-50 text-stone-600 border border-stone-200 hover:bg-stone-100"
         }`}
       >
         Today

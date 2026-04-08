@@ -12,24 +12,24 @@ function getStyles(state, isCurrent, isWeekend, isToday, isDark) {
 
   if (state === "start" || state === "single" || state === "end") {
     return {
-      cell: `${base} bg-violet-600 text-white font-bold shadow-md shadow-violet-600/25`,
+      cell: `${base} ${isDark ? "bg-white text-stone-900" : "bg-stone-800 text-white"} font-bold shadow-sm`,
       text: "",
     };
   }
 
   if (state === "in-range") {
     return {
-      cell: `${base} ${isDark ? "bg-violet-500/[0.08]" : "bg-violet-50"}`,
-      text: isDark ? "text-violet-200" : "text-violet-700",
+      cell: `${base} ${isDark ? "bg-white/[0.06]" : "bg-stone-100"}`,
+      text: isDark ? "text-white/70" : "text-stone-700",
     };
   }
 
   let text = isWeekend
-    ? (isDark ? "text-violet-400" : "text-violet-500 font-medium")
+    ? (isDark ? "text-rose-400/70" : "text-rose-400 font-medium")
     : (isDark ? "text-white/60" : "text-stone-600");
 
-  const hover = isDark ? "hover:bg-white/[0.04]" : "hover:bg-violet-50/70";
-  const today = isToday ? `font-bold ring-1.5 ${isDark ? "ring-violet-500/30" : "ring-violet-400/40"}` : "";
+  const hover = isDark ? "hover:bg-white/[0.04]" : "hover:bg-stone-50";
+  const today = isToday ? `font-bold ring-1.5 ${isDark ? "ring-white/20" : "ring-stone-300"}` : "";
 
   return { cell: `${base} cursor-pointer ${hover} ${today}`, text };
 }

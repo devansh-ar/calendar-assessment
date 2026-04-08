@@ -21,8 +21,8 @@ export default function CalendarGrid({ days, getSelectionState, getNotesForDate,
               key={label}
               className={`text-[10px] font-semibold pb-2.5 pt-1 text-center uppercase tracking-wider ${
                 i >= 5
-                  ? (isDark ? "text-violet-500/60" : "text-violet-400")
-                  : (isDark ? "text-white/15" : "text-stone-400/80")
+                  ? (isDark ? "text-red-400/50" : "text-rose-400")
+                  : (isDark ? "text-white/25" : "text-stone-400")
               }`}
             >
               <span className="hidden sm:inline">{label}</span>

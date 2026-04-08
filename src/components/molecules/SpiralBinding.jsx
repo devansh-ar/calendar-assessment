@@ -5,13 +5,13 @@ const RING_GAP = 48;
 
 export default function SpiralBinding({ isDark }) {
   const totalWidth = RING_COUNT * RING_GAP;
-  const wire = isDark ? "#4a4458" : "#a8a0b5";
-  const wireHi = isDark ? "#655d75" : "#c4bcce";
-  const hole = isDark ? "#0d0b15" : "#e8e4f0";
+  const wire = isDark ? "#444" : "#aaa";
+  const wireHi = isDark ? "#555" : "#ccc";
+  const hole = isDark ? "#1a1a1a" : "#eee";
 
   return (
-    <div className={`relative w-full overflow-visible ${isDark ? "bg-[#110f1a]" : "bg-[#eeebf5]"}`}
-      style={{ height: 26, borderRadius: "16px 16px 0 0" }}>
+    <div className={`relative w-full overflow-visible ${isDark ? "bg-[#1a1a1a]" : "bg-[#f5f5f5]"}`}
+      style={{ height: 26, borderRadius: "8px 8px 0 0" }}>
       <svg
         viewBox={`0 0 ${totalWidth} 38`}
         className="absolute left-1/2 -translate-x-1/2 -top-[10px]"
